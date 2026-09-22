@@ -16,7 +16,7 @@ python3 -m http.server 4173 --directory mobile-preview
 <https://youzxxrica-tech.github.io/xiapu-2026/>
 
 发布仓库只包含这个目录下的静态文件。当前页面按 9 月 29 日至 10 月 3 日游玩、
-10 月 4 日一早返程编排；霞浦酒店共住 5 晚。
+10 月 4 日一早返程浦江，10 月 5 日经义乌回杭州；霞浦酒店共住 5 晚。
 
 ## 路线图与图片
 

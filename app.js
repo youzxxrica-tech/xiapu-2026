@@ -29,6 +29,8 @@ if (routeMapElement && window.L) {
     yushan: { name: '大嵛山岛', point: [26.9475673, 120.3447143] },
     banyueli: { name: '半月里畲族村', point: [26.750619, 119.890127] },
     gaoluo: { name: '高罗海滩', point: [26.751283, 120.09809] },
+    pujiang: { name: '浦江', point: [29.448011, 119.899445] },
+    yiwu: { name: '义乌国际商贸城', point: [29.327904, 120.103175] },
   }
 
   const routes = {
@@ -37,7 +39,7 @@ if (routeMapElement && window.L) {
     3: { label: 'D3 · B 组接站与杨家溪', copy: '酒店 → 霞浦站 → 新美味园 → 杨家溪 → 酒店。', color: '#2f8d83', stops: ['hotel', 'station', 'xinmeiwei', 'yangjiaxi', 'hotel'] },
     4: { label: 'D4 · 三沙乘船去嵛山岛', copy: '酒店 → 三沙码头 → 大嵛山岛 → 三沙码头 → 酒店。海上连线为船程示意。', color: '#3977a6', stops: ['hotel', 'sansha', 'yushan', 'sansha', 'hotel'], dashed: true },
     5: { label: 'D5 · 半月里与高罗', copy: '酒店 → 半月里 → 高罗海滩 → 酒店。', color: '#8d6aad', stops: ['hotel', 'banyueli', 'gaoluo', 'hotel'] },
-    home: { label: '10/4 · 一早返程', copy: '酒店退房后离开霞浦，返程途中每 2 小时休息。', color: '#4f73a1', stops: ['hotel', 'hangzhou'] },
+    home: { label: '10/4—10/5 · 经浦江、义乌返杭', copy: '霞浦 → 浦江住宿 → 义乌国际商贸城 → 杭州。', color: '#4f73a1', stops: ['hotel', 'pujiang', 'yiwu', 'hangzhou'] },
   }
 
   const map = L.map(routeMapElement, { zoomControl: false, scrollWheelZoom: false })
