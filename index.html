@@ -15,7 +15,8 @@
     <meta property="og:image" content="https://youzxxrica-tech.github.io/xiapu-2026/og-cover.png" />
     <meta property="og:url" content="https://youzxxrica-tech.github.io/xiapu-2026/" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=2" />
+    <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="./styles.css?v=3" />
   </head>
   <body>
     <header class="hero">
@@ -63,6 +64,31 @@
         </div>
       </section>
 
+      <section class="route-map-section" aria-labelledby="route-map-title-heading">
+        <div class="section-heading">
+          <p class="section-kicker">THE ROUTE</p>
+          <h2 id="route-map-title-heading">七天路线，一眼看懂</h2>
+        </div>
+        <div class="route-map-card">
+          <div class="route-map-tabs" role="group" aria-label="选择要查看的路线">
+            <button class="route-map-tab is-active" type="button" data-route="xiapu" aria-pressed="true">霞浦段</button>
+            <button class="route-map-tab" type="button" data-route="1" aria-pressed="false">D1</button>
+            <button class="route-map-tab" type="button" data-route="2" aria-pressed="false">D2</button>
+            <button class="route-map-tab" type="button" data-route="3" aria-pressed="false">D3</button>
+            <button class="route-map-tab" type="button" data-route="4" aria-pressed="false">D4</button>
+            <button class="route-map-tab" type="button" data-route="5" aria-pressed="false">D5</button>
+            <button class="route-map-tab" type="button" data-route="6" aria-pressed="false">D6</button>
+            <button class="route-map-tab" type="button" data-route="7" aria-pressed="false">D7</button>
+          </div>
+          <div id="route-map" role="img" aria-label="霞浦七日自驾路线图"></div>
+          <div class="route-map-meta" aria-live="polite">
+            <div><strong id="route-map-label">霞浦段 · D1—D5</strong><p id="route-map-copy">县城为大本营，北线、杨家溪和南线各跑一个方向。</p></div>
+            <a id="route-map-link" href="#day-1">从 D1 开始看</a>
+          </div>
+          <p class="route-map-note">连线表示游玩顺序，并非实时导航路线；小京采用村级近似点位，出发前请用车载导航复核入口。</p>
+        </div>
+      </section>
+
       <nav class="day-nav" aria-label="按天跳转">
         <div class="day-nav__scroll">
           <a href="#day-1">D1</a><a href="#day-2">D2</a><a href="#day-3">D3</a><a href="#day-4">D4</a><a href="#day-5">D5</a><a href="#day-6">D6</a><a href="#day-7">D7</a>
@@ -84,8 +110,8 @@
           <ol class="timeline">
             <li><time>07:00</time><div><strong>杭州出发</strong><p>A 组 4 人 + 狗自驾约 478 km；B 组 2 人高铁到霞浦站。</p></div></li>
             <li><time>14:00</time><div><strong>栖谷云著酒店</strong><p>办理入住，酒店作为六天大本营。</p></div></li>
-            <li><time>17:00</time><div><strong>北岐滩涂</strong><p>17:14 干潮后等 17:48 日落，安顿顺利就去拍滩涂夕照。</p></div></li>
-            <li class="food"><time>19:00</time><div><strong>福宁美食城 · 滩涂海鲜</strong><p>活鲜与标价更适合 6 人点菜；参考人均 60–80 元，先问计价单位。</p></div></li>
+            <li><time>17:00</time><div><strong>北岐滩涂</strong><p>17:14 干潮后等 17:48 日落，安顿顺利就去拍滩涂夕照。</p><div class="place-gallery" aria-label="北岐滩涂照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/beiqi.jpg" data-caption="北岐滩涂 · 低潮后的村落与养殖竹竿" data-source="https://you.ctrip.com/sight/xiapu1154/141282.html"><img src="./assets/photos/beiqi.jpg" alt="北岐滩涂实景" width="1200" height="798" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li class="food"><time>19:00</time><div><strong>福宁美食城 · 滩涂海鲜</strong><p>活鲜与标价更适合 6 人点菜；参考人均 60–80 元，先问计价单位。</p><div class="place-gallery" aria-label="霞浦海鲜餐饮参考照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/funing.jpg" data-caption="霞浦海鲜菜品参考 · 菜品以当天到店为准" data-source="https://www.fjdaily.com/app/content/2021-08/19/content_1110651.html"><img src="./assets/photos/funing.jpg" alt="霞浦海鲜菜品参考" width="800" height="533" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
           </ol>
         </article>
 
@@ -96,11 +122,11 @@
           </div>
           <div class="tide">日出 05:50 · 干潮 05:35 ／ 日落 17:47 · 干潮 17:51</div>
           <ol class="timeline">
-            <li><time>05:00</time><div><strong>北岐日出</strong><p>当天最值得早起的一场：低潮滩涂、渔排竹竿和金色晨光。</p></div></li>
-            <li class="food"><time>08:00</time><div><strong>阿贵包店</strong><p>糊汤、肉包、蒸饺；出发前再确认国庆营业时间。</p></div></li>
-            <li><time>09:30</time><div><strong>小皓海滩</strong><p>S 形滩涂和沙滩活动，牵绳、不追逐滩涂作业。</p></div></li>
-            <li class="food"><time>12:00</time><div><strong>三沙经典小吃</strong><p>海蛎饼、锅边、肉粽按开门情况组合，少排队也少折返。</p></div></li>
-            <li><time>17:00</time><div><strong>东壁村日落</strong><p>东壁栈道或虞公亭桥一带等晚霞，暮色可拍至 18:10。</p></div></li>
+            <li><time>05:00</time><div><strong>北岐日出</strong><p>当天最值得早起的一场：低潮滩涂、渔排竹竿和金色晨光。</p><div class="place-gallery" aria-label="北岐滩涂照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/beiqi.jpg" data-caption="北岐滩涂 · 日出机位所在海湾" data-source="https://you.ctrip.com/sight/xiapu1154/141282.html"><img src="./assets/photos/beiqi.jpg" alt="北岐滩涂实景" width="1200" height="798" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li class="food"><time>08:00</time><div><strong>阿贵包店</strong><p>糊汤、肉包、蒸饺；出发前再确认国庆营业时间。</p><div class="place-gallery" aria-label="阿贵包店小红书笔记照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/agui.jpg" data-caption="阿贵包店相关小红书笔记封面 · 门店与菜品以到店为准" data-source="https://www.xiaohongshu.com/explore/69acdc99000000002203b24b"><img src="./assets/photos/agui.jpg" alt="阿贵包店相关小红书笔记封面" width="1200" height="800" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li><time>09:30</time><div><strong>小皓海滩</strong><p>S 形滩涂和沙滩活动，牵绳、不追逐滩涂作业。</p><div class="place-gallery" aria-label="小皓海滩照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/xiaohao.jpg" data-caption="小皓海滩 · 低潮滩涂与晚霞" data-source="https://you.ctrip.com/sight/xiapu1154/1834692.html"><img src="./assets/photos/xiaohao.jpg" alt="小皓海滩晚霞实景" width="1200" height="900" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li class="food"><time>12:00</time><div><strong>三沙经典小吃</strong><p>海蛎饼、锅边、肉粽按开门情况组合，少排队也少折返。</p><div class="place-gallery" aria-label="霞浦海蛎饼照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/sansha-food.jpg" data-caption="霞浦海蛎饼 · 三沙午间可按营业情况搭配当地小吃" data-source="https://www.fjdaily.com/app/content/2025-02/13/content_3103215.html"><img src="./assets/photos/sansha-food.jpg" alt="霞浦海蛎饼实景" width="1200" height="899" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li><time>17:00</time><div><strong>东壁村日落</strong><p>东壁栈道或虞公亭桥一带等晚霞，暮色可拍至 18:10。</p><div class="place-gallery" aria-label="东壁村照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/dongbi.jpg" data-caption="东壁村 · 面海阶梯与日落方向" data-source="https://www.lifeweek.com.cn/h5/article/detail.do?artId=208711"><img src="./assets/photos/dongbi.jpg" alt="东壁村面海阶梯实景" width="914" height="1200" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
           </ol>
         </article>
 
@@ -111,11 +137,11 @@
           </div>
           <div class="tide">日出 05:51 · 干潮 06:14 ／ 日落 17:46 · 干潮 18:32</div>
           <ol class="timeline">
-            <li><time>04:45</time><div><strong>花竹观景台</strong><p>远眺福瑶列岛，05:28 起进入晨光时段。</p></div></li>
-            <li class="food"><time>07:30</time><div><strong>黄妹闽南糊</strong><p>花竹下山后吃一碗热早餐；店铺较小，国庆营业需核验。</p></div></li>
-            <li><time>09:00</time><div><strong>三沙古镇码头</strong><p>看渔船与港口日常，狗远离装卸作业区。</p></div></li>
-            <li><time>10:30</time><div><strong>留云禅寺</strong><p>依山面海的石窟寺，进殿前询问能否带狗。</p></div></li>
-            <li><time>17:00</time><div><strong>小皓日落补拍</strong><p>若前两天已经拍够或体力不足，可直接回县城休息。</p></div></li>
+            <li><time>04:45</time><div><strong>花竹观景台</strong><p>远眺福瑶列岛，05:28 起进入晨光时段。</p><div class="place-gallery" aria-label="花竹观景台照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/huazhu.jpg" data-caption="花竹观景台 · 日出前后的海岛与养殖区" data-source="https://hk.trip.com/moments/poi-huazhu-sunrise-no-1-viewing-point-145202505/"><img src="./assets/photos/huazhu.jpg" alt="花竹观景台日出实景" width="1200" height="900" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li class="food"><time>07:30</time><div><strong>黄妹闽南糊</strong><p>花竹下山后吃一碗热早餐；店铺较小，国庆营业需核验。</p><div class="place-gallery" aria-label="黄妹闽南糊参考照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/huangmei.jpg" data-caption="霞浦闽南糊出品参考 · 营业与出品以当天为准" data-source="https://www.fjdaily.com/app/content/2024-01/02/content_2272069.html"><img src="./assets/photos/huangmei.jpg" alt="霞浦闽南糊出品参考" width="1080" height="805" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li><time>09:00</time><div><strong>三沙古镇码头</strong><p>看渔船与港口日常，狗远离装卸作业区。</p><div class="place-gallery" aria-label="三沙镇渔港照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/sansha-port.jpg" data-caption="三沙镇 · 沿海村落、渔船与养殖区" data-source="https://www.china8m.com/18052.html"><img src="./assets/photos/sansha-port.jpg" alt="三沙镇渔港实景" width="1135" height="1200" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li><time>10:30</time><div><strong>留云禅寺</strong><p>依山面海的石窟寺，进殿前询问能否带狗。</p><div class="place-gallery" aria-label="留云禅寺照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/liuyun.jpg" data-caption="留云禅寺 · 寺院屋脊与面海视野" data-source="https://www.kaisernchen.com/post/xiapu-the-costal-charm"><img src="./assets/photos/liuyun.jpg" alt="留云禅寺面海实景" width="1200" height="800" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li><time>17:00</time><div><strong>小皓日落补拍</strong><p>若前两天已经拍够或体力不足，可直接回县城休息。</p><div class="place-gallery" aria-label="小皓海滩照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/xiaohao.jpg" data-caption="小皓海滩 · 日落补拍机位参考" data-source="https://you.ctrip.com/sight/xiapu1154/1834692.html"><img src="./assets/photos/xiaohao.jpg" alt="小皓海滩晚霞实景" width="1200" height="900" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
           </ol>
         </article>
 
@@ -126,8 +152,8 @@
           </div>
           <div class="tide">干潮 07:00 · 山水换口味的一天</div>
           <ol class="timeline">
-            <li><time>09:00</time><div><strong>杨家溪</strong><p>古榕、溪谷与牧牛场景；竹筏能否带狗现场问船家。</p></div></li>
-            <li class="food"><time>13:30</time><div><strong>新美味园总店</strong><p>返县城吃本地菜，比在景区将就更稳；海鲜先确认时价。</p></div></li>
+            <li><time>09:00</time><div><strong>杨家溪</strong><p>古榕、溪谷与牧牛场景；竹筏能否带狗现场问船家。</p><div class="place-gallery" aria-label="杨家溪照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/yangjiaxi.jpg" data-caption="杨家溪 · 榕枫公园古榕群" data-source="https://touch.go.qunar.com/poi/706018"><img src="./assets/photos/yangjiaxi.jpg" alt="杨家溪古榕群实景" width="1200" height="797" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li class="food"><time>13:30</time><div><strong>新美味园总店</strong><p>返县城吃本地菜，比在景区将就更稳；海鲜先确认时价。</p><div class="place-gallery" aria-label="霞浦本地菜小红书笔记照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/xinmeiwei.jpg" data-caption="霞浦本地餐馆合集笔记参考图 · 菜品与价格以到店为准" data-source="https://www.xiaohongshu.com/explore/687642000000000013012657"><img src="./assets/photos/xinmeiwei.jpg" alt="霞浦本地餐馆合集小红书笔记封面" width="898" height="1200" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
             <li><time>下午</time><div><strong>回酒店休整</strong><p>连续两天早起后留出空白；晚餐在美食街看明码标价再选。</p></div></li>
           </ol>
         </article>
@@ -139,11 +165,11 @@
           </div>
           <div class="tide tide--accent">干潮 07:57 · 穿防滑鞋，提前半小时到</div>
           <ol class="timeline">
-            <li><time>07:30</time><div><strong>积石沙滩赶海</strong><p>提前到达等 07:57 干潮；观察潮间带生物，不抓取不认识的生物。</p></div></li>
-            <li><time>09:30</time><div><strong>半月里畲族村</strong><p>龙溪宫、畲族博物馆、雷氏宗祠；进入室内前询问宠物规则。</p></div></li>
+            <li><time>07:30</time><div><strong>积石沙滩赶海</strong><p>提前到达等 07:57 干潮；观察潮间带生物，不抓取不认识的生物。</p><div class="place-gallery" aria-label="积石沙滩照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/jishi.jpg" data-caption="积石海滨 · 东海 1 号沿线全景（CC BY-SA 4.0，颐园居）" data-source="https://commons.wikimedia.org/wiki/File:Jishi_Beach,_Xiapu_20230826.jpg"><img src="./assets/photos/jishi.jpg" alt="霞浦积石海滨全景" width="1200" height="289" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li><time>09:30</time><div><strong>半月里畲族村</strong><p>龙溪宫、畲族博物馆、雷氏宗祠；进入室内前询问宠物规则。</p><div class="place-gallery" aria-label="半月里畲族村照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/banyueli.jpg" data-caption="半月里畲族村 · 传统民居与村落空间" data-source="https://zjt.fujian.gov.cn/ztzl/clldfj/ds/nd/202409/t20240926_6529538.htm"><img src="./assets/photos/banyueli.jpg" alt="半月里畲族古村实景" width="1200" height="850" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
             <li class="food"><time>12:00</time><div><strong>南线就近午餐</strong><p>现有高罗店铺笔记可信度不足：只选明码标价、先问价的店，车上备水和零食。</p></div></li>
-            <li><time>13:30</time><div><strong>高罗海滩</strong><p>补给方便、沙滩开阔，适合带狗活动。</p></div></li>
-            <li><time>15:30</time><div><strong>小京沙滩</strong><p>相对清静，作为南线收尾；国庆实际人流现场判断。</p></div></li>
+            <li><time>13:30</time><div><strong>高罗海滩</strong><p>补给方便、沙滩开阔，适合带狗活动。</p><div class="place-gallery" aria-label="高罗海滩照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/gaoluo.jpg" data-caption="高罗海滩 · 霞浦海滨滩涂与渔船" data-source="https://www.xiapuphoto.cn/newsinfo/1044322.html"><img src="./assets/photos/gaoluo.jpg" alt="高罗海滩实景" width="1200" height="800" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
+            <li><time>15:30</time><div><strong>小京沙滩</strong><p>相对清静，作为南线收尾；国庆实际人流现场判断。</p><div class="place-gallery" aria-label="小京沙滩照片"><button class="photo-thumb" type="button" data-photo="./assets/photos/xiaojing.jpg" data-caption="小京沙滩 · 小月牙湾与安静沙岸" data-source="https://you.ctrip.com/sight/xiapu1154/133538938.html"><img src="./assets/photos/xiaojing.jpg" alt="小京沙滩实景" width="1200" height="798" loading="lazy" decoding="async" /><span>点击看大图</span></button></div></div></li>
           </ol>
         </article>
 
@@ -217,6 +243,23 @@
             <a href="https://www.xiaohongshu.com/explore/6a4e33fa0000000020038ca0" rel="noreferrer">本地司机推荐的海鲜店</a>
             <a href="https://www.xiaohongshu.com/explore/68d969cd000000001203d183" rel="noreferrer">三沙镇美食合集</a>
             <a href="https://www.xiaohongshu.com/explore/6879e485000000002201ff5d" rel="noreferrer">霞浦伴手礼记录</a>
+            <p class="sources__subtitle">餐饮图片笔记与景点图片来源</p>
+            <a href="https://www.fjdaily.com/app/content/2021-08/19/content_1110651.html" rel="noreferrer">福建日报 · 霞浦海鲜菜品</a>
+            <a href="https://www.xiaohongshu.com/explore/69acdc99000000002203b24b" rel="noreferrer">阿贵包店相关笔记封面</a>
+            <a href="https://www.fjdaily.com/app/content/2024-01/02/content_2272069.html" rel="noreferrer">霞浦新闻网 · 闽南糊实拍</a>
+            <a href="https://www.xiaohongshu.com/explore/687642000000000013012657" rel="noreferrer">霞浦本地餐馆合集笔记封面</a>
+            <a href="https://www.fjdaily.com/app/content/2025-02/13/content_3103215.html" rel="noreferrer">福建日报 · 霞浦海蛎饼</a>
+            <a href="https://commons.wikimedia.org/wiki/File:Jishi_Beach,_Xiapu_20230826.jpg" rel="noreferrer">Wikimedia Commons · 积石海滨（CC BY-SA 4.0）</a>
+            <a href="https://zjt.fujian.gov.cn/ztzl/clldfj/ds/nd/202409/t20240926_6529538.htm" rel="noreferrer">福建省住房和城乡建设厅 · 半月里村</a>
+            <a href="https://www.kaisernchen.com/post/xiapu-the-costal-charm" rel="noreferrer">Kaisern Chen · 留云禅寺摄影游记</a>
+            <a href="https://you.ctrip.com/sight/xiapu1154/141282.html" rel="noreferrer">携程 · 北岐滩涂</a>
+            <a href="https://you.ctrip.com/sight/xiapu1154/1834692.html" rel="noreferrer">携程 · 小皓海滩</a>
+            <a href="https://you.ctrip.com/sight/xiapu1154/133538938.html" rel="noreferrer">携程 · 小京沙滩</a>
+            <a href="https://www.lifeweek.com.cn/h5/article/detail.do?artId=208711" rel="noreferrer">三联生活周刊 · 东壁村</a>
+            <a href="https://hk.trip.com/moments/poi-huazhu-sunrise-no-1-viewing-point-145202505/" rel="noreferrer">Trip.com · 花竹观景台</a>
+            <a href="https://www.china8m.com/18052.html" rel="noreferrer">八闽之家 · 三沙镇</a>
+            <a href="https://touch.go.qunar.com/poi/706018" rel="noreferrer">去哪儿 · 杨家溪</a>
+            <a href="https://www.xiapuphoto.cn/newsinfo/1044322.html" rel="noreferrer">霞浦东方摄影网 · 高罗海滩</a>
           </div>
         </details>
       </section>
@@ -224,8 +267,16 @@
 
     <footer>
       <p>霞浦七日慢游 · 2026</p>
-      <small>攻略整理于 2026-09-21 · 营业时间与交通管制请在出发前复核</small>
+      <small>攻略整理于 2026-09-21 · 路线图与图片更新于 2026-09-22 · 营业时间与交通管制请在出发前复核</small>
     </footer>
-    <script src="./app.js"></script>
+    <dialog class="lightbox" id="lightbox" aria-label="图片预览">
+      <button class="lightbox__close" type="button" aria-label="关闭图片预览">×</button>
+      <figure>
+        <img id="lightbox-image" alt="" />
+        <figcaption><span id="lightbox-caption"></span><a id="lightbox-source" href="#" rel="noreferrer">查看图片来源</a></figcaption>
+      </figure>
+    </dialog>
+    <script src="./vendor/leaflet/leaflet.js"></script>
+    <script src="./app.js?v=3"></script>
   </body>
 </html>
