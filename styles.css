@@ -125,4 +125,8 @@ footer small { font-size: 11px; line-height: 1.6; }
   .timeline li::before { left: 60px; }
 }
 
+@media (max-width: 420px) {
+  .hero h1 { font-size: clamp(46px, 13vw, 56px); }
+}
+
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
