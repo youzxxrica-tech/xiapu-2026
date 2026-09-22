@@ -1,24 +1,18 @@
-# 图片来源
+# 页面图片来源
 
-页面仅采用每个景点或餐饮条目 1 张低分辨率参考图，点击预览时提供原始来源链接。
-除特别标注的开放许可图片外，图片权利归原作者或来源平台所有；若长期公开传播，建议
-旅行后替换为本人拍摄照片。
+当前页面展示的景点与餐饮图片均来自本次通过小红书 MCP 核实的攻略笔记。每个景点或餐饮条目展示 1–3 张压缩图，点击图片可查看大图和原笔记。
 
-| 文件 | 内容 | 来源与备注 |
+| 页面图片 | 内容 | 小红书原笔记 |
 | --- | --- | --- |
-| `beiqi.jpg` | 北岐滩涂 | [携程目的地图片](https://you.ctrip.com/sight/xiapu1154/141282.html) |
-| `xiaohao.jpg` | 小皓海滩 | [携程目的地图片](https://you.ctrip.com/sight/xiapu1154/1834692.html) |
-| `dongbi.jpg` | 东壁村 | [三联生活周刊](https://www.lifeweek.com.cn/h5/article/detail.do?artId=208711) |
-| `huazhu.jpg` | 花竹观景台 | [Trip.com 目的地图片](https://hk.trip.com/moments/poi-huazhu-sunrise-no-1-viewing-point-145202505/) |
-| `sansha-port.jpg` | 三沙镇渔港 | [八闽之家](https://www.china8m.com/18052.html) |
-| `liuyun.jpg` | 留云禅寺 | [Kaisern Chen 摄影游记](https://www.kaisernchen.com/post/xiapu-the-costal-charm) |
-| `yangjiaxi.jpg` | 杨家溪 | [去哪儿目的地图片](https://touch.go.qunar.com/poi/706018) |
-| `jishi.jpg` | 积石海滨 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Jishi_Beach,_Xiapu_20230826.jpg)，颐园居，CC BY-SA 4.0 |
-| `banyueli.jpg` | 半月里畲族村 | [福建省住房和城乡建设厅](https://zjt.fujian.gov.cn/ztzl/clldfj/ds/nd/202409/t20240926_6529538.htm) |
-| `gaoluo.jpg` | 高罗海滩 | [霞浦东方摄影网](https://www.xiapuphoto.cn/newsinfo/1044322.html) |
-| `xiaojing.jpg` | 小京沙滩 | [携程目的地图片](https://you.ctrip.com/sight/xiapu1154/133538938.html) |
-| `funing.jpg` | 霞浦海鲜菜品参考 | [福建日报](https://www.fjdaily.com/app/content/2021-08/19/content_1110651.html) |
-| `agui.jpg` | 阿贵包店参考 | [小红书笔记](https://www.xiaohongshu.com/explore/69acdc99000000002203b24b) |
-| `huangmei.jpg` | 霞浦闽南糊出品参考 | [霞浦新闻网 / 福建日报](https://www.fjdaily.com/app/content/2024-01/02/content_2272069.html) |
-| `xinmeiwei.jpg` | 霞浦本地餐馆参考 | [小红书笔记](https://www.xiaohongshu.com/explore/687642000000000013012657) |
-| `sansha-food.jpg` | 霞浦海蛎饼 | [福建日报](https://www.fjdaily.com/app/content/2025-02/13/content_3103215.html) |
+| `beiqi-xhs-1/2.jpg` | 北岐滩涂 | [北岐滩涂日出攻略](https://www.xiaohongshu.com/explore/6aae08b7000000002a02c483) |
+| `xiaohao-xhs-1/2.jpg`、`yangjiaxi-xhs-1.jpg` | 小皓、杨家溪 | [小皓海滩与杨家溪](https://www.xiaohongshu.com/explore/68e270df0000000003034a5c) |
+| `dongbi-xhs-1/2/3.jpg` | 东壁村 | [东壁村 18 个摄影机位](https://www.xiaohongshu.com/explore/6a48a19a0000000008001a42) |
+| `yushan-xhs-1.jpg`、`yushan-food-1/2.jpg` | 嵛山岛、岛上简餐 | [和小狗的上海—福建自驾游](https://www.xiaohongshu.com/explore/6a3bbe950000000016026670) |
+| `yushan-xhs-2/3.jpg` | 嵛山岛带狗实拍 | [嵛山岛一日往返带狗攻略](https://www.xiaohongshu.com/explore/6aa11938000000002a02638b) |
+| `banyueli-xhs-1/2.jpg` | 半月里 | [300 年畲族古村](https://www.xiaohongshu.com/explore/69e37648000000002102c2b2) |
+| `gaoluo-xhs-1.jpg` | 高罗海滩 | [高罗海滩实拍](https://www.xiaohongshu.com/explore/6a5e13b7000000001f01fe64) |
+| `funing-xhs-1/2/3.jpg` | 福宁美食城菜品 | [福宁美食城滩涂海鲜](https://www.xiaohongshu.com/explore/69bb92b900000000220007d7) |
+| `xinmeiwei-xhs-1/2/3.jpg` | 新美味园菜品 | [新美味园总店](https://www.xiaohongshu.com/explore/6a4798870000000008033aa9) |
+| `agui.jpg` | 阿贵包店 | [阿贵包店相关笔记](https://www.xiaohongshu.com/explore/69acdc99000000002203b24b) |
+
+图片权利归原作者及来源平台所有。页面只作同行成员行程沟通；旅行后可替换为本人拍摄照片。
