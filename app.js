@@ -135,6 +135,7 @@ if (lightbox && lightboxImage && lightboxCaption && lightboxSource && lightboxCo
   let imageScale = 1
   let imageX = 0
   let imageY = 0
+  let currentPhotoToken = 0
   const activePointers = new Map()
 
   const updateImageTransform = () => {
@@ -160,13 +161,21 @@ if (lightbox && lightboxImage && lightboxCaption && lightboxSource && lightboxCo
     return Math.hypot(second.x - first.x, second.y - first.y)
   }
 
+  const preloadPhoto = (index) => {
+    const button = galleryItems[index]
+    if (!button) return
+    const image = new Image()
+    image.src = button.dataset.photo
+  }
+
   const showPhoto = (index) => {
     const button = galleryItems[index]
     if (!button) return
     const image = button.querySelector('img')
+    const photoToken = ++currentPhotoToken
     currentIndex = index
     resetImageTransform()
-    lightboxImage.src = button.dataset.photo
+    lightboxImage.src = image.currentSrc || image.src
     lightboxImage.alt = image?.alt || ''
     lightboxCaption.textContent = button.dataset.caption || image?.alt || ''
     lightboxSource.href = button.dataset.source
@@ -175,6 +184,15 @@ if (lightbox && lightboxImage && lightboxCaption && lightboxSource && lightboxCo
     lightboxNext.disabled = currentIndex === galleryItems.length - 1
     lightboxPrevious.hidden = galleryItems.length < 2
     lightboxNext.hidden = galleryItems.length < 2
+
+    const fullImage = new Image()
+    fullImage.addEventListener('load', () => {
+      if (photoToken !== currentPhotoToken) return
+      lightboxImage.src = fullImage.src
+      preloadPhoto(index - 1)
+      preloadPhoto(index + 1)
+    }, { once: true })
+    fullImage.src = button.dataset.photo
   }
 
   const movePhoto = (step) => showPhoto(currentIndex + step)
