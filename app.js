@@ -122,18 +122,61 @@ const lightbox = document.querySelector('#lightbox')
 const lightboxImage = document.querySelector('#lightbox-image')
 const lightboxCaption = document.querySelector('#lightbox-caption')
 const lightboxSource = document.querySelector('#lightbox-source')
+const lightboxCounter = document.querySelector('#lightbox-counter')
+const lightboxPrevious = document.querySelector('.lightbox__nav--prev')
+const lightboxNext = document.querySelector('.lightbox__nav--next')
 
-if (lightbox && lightboxImage && lightboxCaption && lightboxSource) {
+if (lightbox && lightboxImage && lightboxCaption && lightboxSource && lightboxCounter && lightboxPrevious && lightboxNext) {
+  let galleryItems = []
+  let currentIndex = 0
+  let pointerStart = null
+
+  const showPhoto = (index) => {
+    const button = galleryItems[index]
+    if (!button) return
+    const image = button.querySelector('img')
+    currentIndex = index
+    lightboxImage.src = button.dataset.photo
+    lightboxImage.alt = image?.alt || ''
+    lightboxCaption.textContent = button.dataset.caption || image?.alt || ''
+    lightboxSource.href = button.dataset.source
+    lightboxCounter.textContent = `${currentIndex + 1} / ${galleryItems.length}`
+    lightboxPrevious.disabled = currentIndex === 0
+    lightboxNext.disabled = currentIndex === galleryItems.length - 1
+    lightboxPrevious.hidden = galleryItems.length < 2
+    lightboxNext.hidden = galleryItems.length < 2
+  }
+
+  const movePhoto = (step) => showPhoto(currentIndex + step)
+
   document.querySelectorAll('.photo-thumb').forEach((button) => {
     button.addEventListener('click', () => {
-      const image = button.querySelector('img')
-      lightboxImage.src = button.dataset.photo
-      lightboxImage.alt = image?.alt || ''
-      lightboxCaption.textContent = button.dataset.caption || image?.alt || ''
-      lightboxSource.href = button.dataset.source
+      galleryItems = [...button.closest('.place-gallery').querySelectorAll('.photo-thumb')]
+      showPhoto(galleryItems.indexOf(button))
       lightbox.showModal()
     })
   })
+
+  lightboxPrevious.addEventListener('click', () => movePhoto(-1))
+  lightboxNext.addEventListener('click', () => movePhoto(1))
   lightbox.querySelector('.lightbox__close').addEventListener('click', () => lightbox.close())
   lightbox.addEventListener('click', (event) => { if (event.target === lightbox) lightbox.close() })
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.open || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return
+    event.preventDefault()
+    movePhoto(event.key === 'ArrowLeft' ? -1 : 1)
+  })
+  lightboxImage.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse') return
+    pointerStart = { x: event.clientX, y: event.clientY }
+  })
+  lightboxImage.addEventListener('pointerup', (event) => {
+    if (!pointerStart || event.pointerType === 'mouse') return
+    const horizontalDistance = event.clientX - pointerStart.x
+    const verticalDistance = event.clientY - pointerStart.y
+    pointerStart = null
+    if (Math.abs(horizontalDistance) < 45 || Math.abs(horizontalDistance) < Math.abs(verticalDistance) * 1.25) return
+    movePhoto(horizontalDistance < 0 ? 1 : -1)
+  })
+  lightboxImage.addEventListener('pointercancel', () => { pointerStart = null })
 }
