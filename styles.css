@@ -160,7 +160,9 @@ main { overflow: clip; }
 .lightbox { width: min(960px, calc(100vw - 24px)); max-width: none; max-height: calc(100dvh - 24px); padding: 0; overflow: hidden; border: 0; border-radius: 18px; color: #fff; background: #062f29; box-shadow: 0 28px 90px rgba(0,0,0,.45); }
 .lightbox::backdrop { background: rgba(1,20,17,.84); backdrop-filter: blur(8px); }
 .lightbox figure { display: grid; margin: 0; }
-.lightbox img { display: block; width: 100%; max-height: calc(100dvh - 126px); object-fit: contain; background: #031f1b; touch-action: pan-y; user-select: none; }
+.lightbox__stage { display: grid; place-items: center; overflow: hidden; background: #031f1b; touch-action: none; }
+.lightbox img { display: block; width: 100%; max-height: calc(100dvh - 126px); object-fit: contain; transform: translate3d(0, 0, 0) scale(1); transform-origin: center; user-select: none; -webkit-user-drag: none; will-change: transform; }
+.lightbox img.is-zoomed { cursor: grab; }
 .lightbox figcaption { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px 17px; color: rgba(255,255,255,.84); font-size: 12px; line-height: 1.5; }
 .lightbox figcaption > span { display: grid; gap: 3px; }
 .lightbox figcaption small { color: rgba(255,255,255,.52); font: 700 11px/1.4 ui-monospace, monospace; }

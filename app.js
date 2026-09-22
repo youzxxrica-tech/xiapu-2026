@@ -129,13 +129,41 @@ const lightboxNext = document.querySelector('.lightbox__nav--next')
 if (lightbox && lightboxImage && lightboxCaption && lightboxSource && lightboxCounter && lightboxPrevious && lightboxNext) {
   let galleryItems = []
   let currentIndex = 0
-  let pointerStart = null
+  let gestureStart = null
+  let imageScale = 1
+  let imageX = 0
+  let imageY = 0
+  const activePointers = new Map()
+
+  const updateImageTransform = () => {
+    const maxX = lightboxImage.clientWidth * (imageScale - 1) / 2
+    const maxY = lightboxImage.clientHeight * (imageScale - 1) / 2
+    imageX = Math.max(-maxX, Math.min(maxX, imageX))
+    imageY = Math.max(-maxY, Math.min(maxY, imageY))
+    lightboxImage.style.transform = `translate3d(${imageX}px, ${imageY}px, 0) scale(${imageScale})`
+    lightboxImage.classList.toggle('is-zoomed', imageScale > 1)
+  }
+
+  const resetImageTransform = () => {
+    activePointers.clear()
+    gestureStart = null
+    imageScale = 1
+    imageX = 0
+    imageY = 0
+    updateImageTransform()
+  }
+
+  const pointerDistance = () => {
+    const [first, second] = [...activePointers.values()]
+    return Math.hypot(second.x - first.x, second.y - first.y)
+  }
 
   const showPhoto = (index) => {
     const button = galleryItems[index]
     if (!button) return
     const image = button.querySelector('img')
     currentIndex = index
+    resetImageTransform()
     lightboxImage.src = button.dataset.photo
     lightboxImage.alt = image?.alt || ''
     lightboxCaption.textContent = button.dataset.caption || image?.alt || ''
@@ -168,15 +196,47 @@ if (lightbox && lightboxImage && lightboxCaption && lightboxSource && lightboxCo
   })
   lightboxImage.addEventListener('pointerdown', (event) => {
     if (event.pointerType === 'mouse') return
-    pointerStart = { x: event.clientX, y: event.clientY }
+    lightboxImage.setPointerCapture(event.pointerId)
+    activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
+    if (activePointers.size === 2) {
+      gestureStart = { type: 'pinch', distance: pointerDistance(), scale: imageScale }
+    } else if (activePointers.size === 1) {
+      gestureStart = { type: imageScale > 1 ? 'pan' : 'swipe', x: event.clientX, y: event.clientY, imageX, imageY }
+    }
+  })
+  lightboxImage.addEventListener('pointermove', (event) => {
+    if (!activePointers.has(event.pointerId)) return
+    activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
+    if (activePointers.size === 2 && gestureStart?.type === 'pinch') {
+      imageScale = Math.max(1, Math.min(4, gestureStart.scale * pointerDistance() / gestureStart.distance))
+      if (imageScale === 1) imageX = imageY = 0
+      updateImageTransform()
+    } else if (activePointers.size === 1 && gestureStart?.type === 'pan') {
+      imageX = gestureStart.imageX + event.clientX - gestureStart.x
+      imageY = gestureStart.imageY + event.clientY - gestureStart.y
+      updateImageTransform()
+    }
   })
   lightboxImage.addEventListener('pointerup', (event) => {
-    if (!pointerStart || event.pointerType === 'mouse') return
-    const horizontalDistance = event.clientX - pointerStart.x
-    const verticalDistance = event.clientY - pointerStart.y
-    pointerStart = null
-    if (Math.abs(horizontalDistance) < 45 || Math.abs(horizontalDistance) < Math.abs(verticalDistance) * 1.25) return
-    movePhoto(horizontalDistance < 0 ? 1 : -1)
+    if (!activePointers.has(event.pointerId)) return
+    const wasSinglePointer = activePointers.size === 1
+    const horizontalDistance = event.clientX - (gestureStart?.x || event.clientX)
+    const verticalDistance = event.clientY - (gestureStart?.y || event.clientY)
+    const wasSwipe = wasSinglePointer && gestureStart?.type === 'swipe'
+    activePointers.delete(event.pointerId)
+
+    if (wasSwipe && Math.abs(horizontalDistance) >= 45 && Math.abs(horizontalDistance) >= Math.abs(verticalDistance) * 1.25) {
+      movePhoto(horizontalDistance < 0 ? 1 : -1)
+      return
+    }
+
+    const remainingPointer = [...activePointers.values()][0]
+    gestureStart = remainingPointer && imageScale > 1
+      ? { type: 'pan', x: remainingPointer.x, y: remainingPointer.y, imageX, imageY }
+      : null
   })
-  lightboxImage.addEventListener('pointercancel', () => { pointerStart = null })
+  lightboxImage.addEventListener('pointercancel', (event) => {
+    activePointers.delete(event.pointerId)
+    gestureStart = null
+  })
 }
