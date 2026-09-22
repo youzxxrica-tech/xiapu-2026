@@ -95,7 +95,7 @@ if (routeMapElement && window.L) {
     if (routeKey === 'xiapu') {
       ;['1', '2', '3', '4', '5'].forEach((dayKey) => { bounds = bounds.concat(addRoute(dayKey, false, markerSet)) })
       labelElement.textContent = '霞浦段 · D1—D5'
-      copyElement.textContent = '县城住 5 晚，北线、接站、嵛山岛、南线各自成线。'
+      copyElement.textContent = '以县城为驻点，串联北线滩涂、杨家溪、嵛山岛与南线畲乡。'
       routeLink.href = '#day-1'
       routeLink.textContent = '从 D1 开始看'
     } else {
